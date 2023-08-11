@@ -16,20 +16,15 @@
         </div>  
     </div>
 
-<div class="d-flex" style="max-height: 80%">
-    <div class="col-lg-10 col-sm-12 border bg-light rounded-3 p-2 me-2 overflow-auto shadow">
-        <div class="mx-3">
-            <h4 class="text-success my-2">For Approval</h4>
-        </div>
+<div class=" col-md-12 col-lg-10" style="max-height: 80%">
         <table class="table table-striped border rounded-3">
             <thead>
                 <tr class="align-middle style="font-size: 0.9em;">
                     <th class="text-success" style="width:15%;">Employee ID</th>
                     <th class="text-success" style="width:20%;">Name</th>
-                    <th class="text-success" style="width:15%;">Department</th>
+                    <th class="text-success" style="width:15%;">Office</th>
                     <th class="text-success" style="width:12%;">Leave Start</th>
-                    <th class="text-success" style="width:12%;">Leave End</th>
-                    <th class="text-success" style="width:15%;">Status</th> 
+                    <th class="text-success" style="width:12%;">Leave End</th> 
                     <th class="text-success" style="width:10%;">Type</th>         
                     <th class="text-success" style="width:10%;"></th>      
                 </tr>
@@ -39,11 +34,11 @@
                 <tr class="align-middle employee-row" style="font-size: 0.8em;">
                     <td><%= leave.employeeId %></td>
                     <td class="employee-firstName"><%= leave.firstName %> <%= leave.lastName %></td>
-                    <td></td>
+                    <td><%= leave.office %></td>
                     <td><%= leave.leaveStart %></td>
                     <td><%= leave.leaveEnd %></td>
-                    <td><%= leave.status %></td>
-                    <td></td>
+                    <td><%= leave.type %></td>
+                    
                     <td>
                         <div class="actions mx-0 d-flex align-middle">
                             <a href="/leave-management/<%= leave._id %>"><button class="btn btn-sm btn-light border border-success px-3 me-1" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-search"></i></button></a>

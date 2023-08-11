@@ -7,6 +7,5 @@ const activePage = '/reports'
 
 exports.transactionViews = async (req,res)=>{
     const transactions = await Transaction.find({});
-
-    res.render('pages/transactions',{transactions, activePage})
+    res.render('pages/transactions', {transactions, activePage})
 }

@@ -8,8 +8,8 @@
         <div class="">
             <a href="/users/form"><button class="btn btn-success">Add User</button></a>
         </div>
-        <div class="d-flex justify-content-end mb-2">
-            <select name="role" id="roleFilter" class="form-control w-25" required>
+        <div class="d-flex justify-content-end mb-3 me-3">
+            <select name="role" id="roleFilter" class="form-control w-50 me-2 " required>
                 <option value="" selected>All</option>
                 <% for (let role of roles) { %>
                     <option value="<%= role %>"><%= role[0].toUpperCase() + role.slice(1) %></option>
@@ -20,14 +20,14 @@
 </div>
 
 <section class="d-flex mx-3" style="max-height:80vh;">
-    <div class="col-10 overflow-auto">
+    <div class="col-lg-10 col-md-12 overflow-auto">
         <table class="table table-striped border rounded-3">
             <thead>
                 <tr>
-                    <th class="text-success" style="width:15%;">Username</th>
-                    <th class="text-success" style="width:20%;">First Name</th>
-                    <th class="text-success" style="width:20%;">Last Name</th>
-                    <th class="text-success" style="width:10%;">Type</th>
+                    <th class="text-success" style="width:20%;">Username</th>
+                    <th class="text-success" style="width:25%;">First Name</th>
+                    <th class="text-success" style="width:25%;">Last Name</th>
+                    <th class="text-success" style="width:15%;">Role</th>
                     <th class="text-success" style="width:15%;"></th>        
                 </tr>
             </thead>
@@ -39,10 +39,12 @@
                     <td class="align-middle user-lastName" style="font-size:0.9em;"><%=user.lastName  %></td>
                     <td class="align-middle user-role" style="font-size:0.9em;"><%=user.role  %></td>
                     <td class="">
-                        <div class="actions mx-0">
-                            <a href="/users/<%= user.id %>"><button class="btn btn-sm btn-light border border-success px-3 text-success" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-eye"></i></button></a>
-                            <a href="/users/<%= user.id %>/edit"><button class="btn btn-sm btn-success" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
-                            <a href="/users/update-users-form"><button class="btn btn-sm btn-danger ms-1" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Deactivate"><i class="bi bi-x-lg"></i></button></a>
+                        <div class=" d-flex actions mx-0">
+                            <a href="/users/<%= user.id %>"><button class="btn btn-sm btn-light border border-success px-3 text-success me-1" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-eye"></i></button></a>
+                            <a href="/users/<%= user.id %>/edit"><button class="btn btn-sm btn-success me-2" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
+                            <form action="/users/<%= user.id %>?_method=DELETE" method="POST">
+                                <a href="/users/update-users-form"><button class="btn btn-sm btn-danger ms-1" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Deactivate"><i class="bi bi-x-lg"></i></button></a>
+                            </form>
                         </div>
                     </td>
                 </tr>

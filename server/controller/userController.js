@@ -63,6 +63,7 @@ exports.editUser = async (req,res)=>{
 exports.deleteUser = async(req,res) =>{
   const {id} = req.params;
   await User.findByIdAndDelete(id);
+  req.flash('error', 'You have deleted a user');
   res.redirect('/users');
 }
 

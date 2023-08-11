@@ -3,9 +3,24 @@
 
     <h3 class="page-header mt-4 ms-3">User Logs</h3>
 
-    <div class="col-7 m-auto">
-        <%for(let transaction of transactions) {%>
-                <p><%= transaction.transaction %> - Date: <%= transaction.createdAt %></p>
-            <% } %>
+    <div class="col-10 ms-3">
+        <table class="table table-striped border rounded-3 shadow">
+            <thead>
+                <tr>
+                    <th class="text-success">Username</th>
+                    <th class="text-success">Transaction</th>
+                    <th class="text-success">Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%for(let transaction of transactions) {%>
+                <tr>
+                    <td class="align-middle text-success" style="font-size:0.9em;"><%= transaction.username %></td>
+                    <td class="align-middle" style="font-size:0.9em;"><%= transaction.transaction %></td>
+                    <td class="align-middle" style="font-size:0.9em;"><%= new Date(transaction.createdAt).toLocaleString() %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
     </div>
 
