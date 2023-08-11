@@ -6,7 +6,7 @@ const positions = require('../../seeds/position');
 const designations = require('../../seeds/designation');
 // Models
 const Employee = require('../../models/employee');
-const Transaction = require('../../models/transaction');
+const Transaction = require('../../models/transaction')
 const User = require('../../models/user');
 
 // DB Connection
@@ -62,13 +62,10 @@ exports.addEmployee = catchAsync(async (req, res) => {
     
     const newEmployee = new Employee(employee);
     await newEmployee.save();
-    const userId = req.user.id;
-    const user = await User.findById(userId);
+     const addTransaction = {
+         transaction: `${newEmployee.firstName} is added to the database`
+     }
 
-    const addTransaction = {
-        username: user.username,
-        transaction: `${employee.firstName} ${employee.lastName} is added to the Employee database.`
-    }
     const transaction =  new Transaction(addTransaction);
     await transaction.save();
     res.redirect('/employees');
@@ -113,16 +110,6 @@ exports.updateEmployee = catchAsync(async(req, res) => {
     const updateEmployeeId = await Employee.findByIdAndUpdate(id, { $set: {employeeId: employeeId}} )
     
     const employeeUpdate = await Employee.findByIdAndUpdate(id,{...req.body.employee});
-
-    const userId = req.user.id;
-    const user = await User.findById(userId);
-
-    const addTransaction = {
-        username: user.username,
-        transaction: `${employee.firstName} ${employee.lastName}'s profile is updated.`
-    }
-    const transaction =  new Transaction(addTransaction);
-    await transaction.save();
     req.flash('success', 'You Updated The Employee Information');
     res.redirect(`/employees/${id}`)
 })
@@ -131,8 +118,12 @@ exports.deleteEmployee = catchAsync(async (req, res) => {
     const id = req.params.id;
     const employee = await Employee.findById(id);
     await Employee.findByIdAndDelete(id);
+
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+
     const addTransaction = {
-        transaction: `${employee.firstName} has been deleted`
+        transaction: `${employee.firstName} has been deleted ${user.firstName} ${user.lastName}`
     }
 
     const transaction =  new Transaction(addTransaction);
@@ -144,36 +135,56 @@ exports.deleteEmployee = catchAsync(async (req, res) => {
 exports.deactivateEmployee = async (req, res) => {
     const {id} = req.params;
     const employee = await Employee.findByIdAndUpdate(id, {$set: {isActive: false}})
+    const employeeName = `${employee.firstName.charAt(0).toUpperCase() + employee.firstName.slice(1).toLowerCase()} ${employee.lastName.charAt(0).toUpperCase() + employee.lastName.slice(1).toLowerCase()}`
+
     const userId = req.user.id;
     const user = await User.findById(userId);
-
+    const firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1).toLowerCase()
+    const lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1).toLowerCase()
+    
     const addTransaction = {
-        username: user.username,
-        transaction: `${employee.firstName} ${employee.lastName} is deactivated in the Employee Database.`
+        transaction: `${employee.firstName} is deactivated by ${firstName} ${lastName}`
     }
     const transaction =  new Transaction(addTransaction);
     await transaction.save();
-    req.flash('error', 'You Deactivated An Employee');
+    req.flash('error', `You Deactivated ${employeeName}`);
     res.redirect(`/employees/${id}`)
 }
 
 // Activate an employee
 exports.activateEmployee = async (req, res) => {
     const {id} = req.params;
-    console.log(req.user);
     const employee = await Employee.findByIdAndUpdate(id, {$set: {isActive: true}})
+    const employeeName = `${employee.firstName.charAt(0).toUpperCase() + employee.firstName.slice(1).toLowerCase()} ${employee.lastName.charAt(0).toUpperCase() + employee.lastName.slice(1).toLowerCase()}`
+
     const userId = req.user.id;
     const user = await User.findById(userId);
+    const firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1).toLowerCase()
+    const lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1).toLowerCase()
 
     const addTransaction = {
-        username: user.username,
-        transaction: `${employee.firstName} ${employee.lastName} is activated in the Employee Database.`
+        transaction: `${employee.firstName} is activated by ${firstName} ${lastName}`
     }
     const transaction =  new Transaction(addTransaction);
     await transaction.save();
-    req.flash('success', 'You Activated An Employee');
+    req.flash('success', `You Activated ${employeeName}`);
     res.redirect(`/employees/${id}`)
 }
 
 
+module.exports.uploadImage = async(req, res) => {
+    const {id} = req.params;
+    const employee = await Employee.findById(id);
+    const fileData = req.file;
 
+    if(fileData){
+        const uploadedImage = employee.uploadedImage;
+
+        uploadedImage.filename = fileData.originalname;
+        uploadedImage.contentType = fileData.mimetype;
+        uploadedImage.data = fileData.buffer;
+        console.log(req.file)
+        await employee.save();
+        res.redirect(`/employees/${id}`)
+    }
+}

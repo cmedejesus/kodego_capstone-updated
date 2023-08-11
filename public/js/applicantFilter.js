@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const firstName = row.querySelector('.applicant-firstName').textContent.toLowerCase();
             const lastName = row.querySelector('.applicant-lastName').textContent.toLowerCase();
 
-            const officeFilterMatch = selectedOffice === 'all' || applicantOffice === selectedOffice;
+            const officeFilterMatch = selectedOffice === 'All' || applicantOffice === selectedOffice;
             const statusFilterMatch = selectedStatus === '' || applicantStatus === selectedStatus;
             const searchFilterMatch = firstName.includes(searchText) || lastName.includes(searchText);
 

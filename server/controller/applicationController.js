@@ -2,21 +2,15 @@ const mongoose =require('mongoose');
 const catchAsync = require('../../utils/catchAsync');
 const Applicant = require('../../models/applicant');
 const Employee = require('../../models/employee');
-const User = require('../../models/user');
-const Transaction = require('../../models/transaction');
+const Transaction = require('../../models/transaction')
 // Seeds
 const offices = require('../../seeds/offices');
 const positions = require('../../seeds/position');
 const designations = require('../../seeds/designation');
+// Models
+const User = require('../../models/user'); 
 
-// DB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/hrms')
-.then(()=>{
-    console.log('Connection Open.');
-})
-.catch((err)=>{
-    console.log(`Error: ${err}`);
-})
+
 const activePage = '/applications'
 
 async function generateNewEmployeeId(applicantPosition, applicantStartYear) {
@@ -39,6 +33,7 @@ async function generateNewEmployeeId(applicantPosition, applicantStartYear) {
 
 exports.viewAllApplicants = catchAsync(async(req, res) => {
     const applicants = await Applicant.find({});
+    applicants.reverse();
     res.render('pages/application/appManagement',{applicants, offices, positions, designations, activePage});
 })
 
@@ -48,25 +43,24 @@ exports.applicantForm = (req, res) => {
 
 exports.addApplicant = catchAsync(async(req, res) => {
     const applicant = req.body.applicant;
-
     const applicantPosition = applicant.position.slice(0, 3).toUpperCase()
     const applicantStartYear = applicant.dateStart.slice(2, 4)
-
     const employeeId = await generateNewEmployeeId(applicantPosition, applicantStartYear);
-
     req.body.applicant.employeeId = employeeId;
 
     const newApplicant = new Applicant(applicant);
     await newApplicant.save();
+
     const userId = req.user.id;
     const user = await User.findById(userId);
-
     const addTransaction = {
         username: user.username,
+        role: user.role,
         transaction: `${applicant.firstName} ${applicant.lastName} is added to the Applicant Database.`
     }
     const transaction =  new Transaction(addTransaction);
     await transaction.save();
+
     res.redirect('/applications');
 })
 
@@ -91,20 +85,18 @@ exports.updateApplicant = catchAsync(async(req, res) => {
     const applicant = req.body.applicant;
     const applicantPosition = applicant.position.slice(0, 3).toUpperCase();
     const applicantStartyear = applicant.dateStart.slice(2, 4);
-
     const employeeId = `${applicantPosition}${applicantStartyear}${last4Digits}`;
 
     req.body.applicant.employeeId = employeeId;
 
     const updateEmployeeId = await Applicant.findByIdAndUpdate(id, {$set: {employeeId: employeeId}});
-    
     const applicantUpdate = await Applicant.findByIdAndUpdate(id, {...req.body.applicant});
 
     const userId = req.user.id;
     const user = await User.findById(userId);
-
     const addTransaction = {
         username: user.username,
+        role: user.role,
         transaction: `${applicant.firstName} ${applicant.lastName}'s applicant profile has been updated.`
     }
     const transaction =  new Transaction(addTransaction);
@@ -120,14 +112,13 @@ exports.rejectApplicant = catchAsync(async (req, res) => {
 
     const userId = req.user.id;
     const user = await User.findById(userId);
-
     const addTransaction = {
         username: user.username,
+        role: user.role,
         transaction: `${applicant.firstName} ${applicant.lastName}'s application has been rejected.`
     }
     const transaction =  new Transaction(addTransaction);
     await transaction.save();
-
     req.flash('error', 'You rejected An applicant.');
     res.redirect(`/applications/${id}`);
 })
@@ -163,17 +154,6 @@ exports.approveApplicant = catchAsync(async (req, res) => {
         dateStart: applicant.dateStart
     });
     await employee.save();
-
-    const userId = req.user.id;
-    const user = await User.findById(userId);
-
-    const addTransaction = {
-        username: user.username,
-        transaction: `${applicant.firstName} ${applicant.lastName}'s application has been approved & added to the Employee Database.`
-    }
-    const transaction =  new Transaction(addTransaction);
-    await transaction.save();
-
     req.flash('success', 'You approved an applicant.');
     res.redirect(`/applications/${id}`);
 })

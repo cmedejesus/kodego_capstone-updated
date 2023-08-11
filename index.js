@@ -11,12 +11,12 @@ const localStrategy = require('passport-local');
 const User = require('./models/user');
 
 // Router Imports
+const applicationRouter = require('./server/routes/applicationRouters');
 const dashboardRouter = require('./server/routes/dashboardRouter');
 const employeesRouters = require('./server/routes/employeesRouters');
 const transactionRouters = require('./server/routes/transactionRouters');
 const leaveRouters = require('./server/routes/leaveRouter');
-const userRouters = require('./server/routes/userRouter');
-const applicationRouters = require('./server/routes/applicationRouters');
+const usersRouters = require('./server/routes/usersRouter');
 
 // Configure ejs mate
 app.engine('ejs', ejsMate);
@@ -54,26 +54,31 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+const { textFormatMiddleware } = require('./middlewares');
 // Connect Flash
 app.use(flash());
 app.use((req, res, next) => {
+   
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 })
 
+app.use(textFormatMiddleware);
 
 // Execute Router
 app.use('', dashboardRouter)
 app.use('', employeesRouters)
 app.use('', leaveRouters)
 app.use('', transactionRouters)
-app.use('', userRouters)
-app.use('', applicationRouters)
+app.use('', usersRouters)
+app.use('', applicationRouter)
+
+
 
 app.use('*',(req, res, next)=>{
-    next(new ExpressError('Page not found Error BOI!', 404));
+    next(new ExpressError('Sorry, the page not found!', 404));
 })
 
 const activePage = 'nA';

@@ -4,53 +4,64 @@
     <h3 class="page-header mt-4 ms-3">Application Management</h3>
 </div>
 
-<div class="d-flex col-10 justify-content-between mx-3">
+<div class="ms-3 mb-3">
     <div class="">
-        <a href="/applications/form"><button class="btn btn-success">Add Applicant</button></a>
+        <a href="/applications/form"><button class="btn btn-success"><i class="bi bi-person-add pe-3"></i>Add Applicant</button></a>
     </div>
+</div>
+
+<div class="d-flex col-12 justify-content-between mx-3 ">
+        
     <div class="d-flex justify-content-end mb-2">
-        <select name="status" class="form-control w-25" id="statusFilter">
-            <option value="">All</option>
-            <option value="Pending">Pending</option>
-            <option value="Rejected">Rejected</option>
-            <option value="Approved">Approved</option>
-        </select>
-        <select name="office" class="form-control w-50 mx-3" id="officeFilter">
-            <option value="all" selected>All</option>
-            <% for (let office of offices) { %>
+        <select name="" id="officeFilter" class="ps-1 rounded">
+            <option value="All">All Office</option>
+           <% for(let office of offices) { %>
             <option value="<%= office.office %>"><%= office.office %></option>
             <% } %>
         </select>
-        <form action="" class="d-flex me-2">
-            <div id="printButton"><button class="btn btn-light me-2" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Print Table"><i class="bi bi-printer"></i></button></div>
-            <input type="text" class="form-control me-2" id="searchInput" placeholder="Search...">
-        </form>
+        <select name="" id="positionFilter" class="ps-1 ms-2 rounded">
+            <option value="">All Positions</option>
+            <% for(let position of positions) { %>
+                <option value="<%= position.slice(0,3).toUpperCase() %>"><%= position %></option>
+            <% } %>
+        </select>
+        <select name="" id="statusFilter" class="ps-1 ms-2 me-2 rounded">
+            <option value="">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+    </div>
+    <div class="d-flex justify-content-end mb-2">
+            <div id="printButton"><button class="btn btn-light border border-secondary me-2" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Print Table"><i class="bi bi-printer"></i></button>
+            </div>
+            <input type="text" class="form-control me-2 me-5" id="searchInput" placeholder="Search Name...">
     </div>  
 </div>
 
-<section class="d-flex mx-3" style="max-height:80vh;">
-    <div class="col-10 overflow-auto">
-        <table class="table table-striped border rounded-3" id="employeeTable">
-            <thead>
+<section class="d-flex mx-3" style="max-height:75vh;">
+    <div class="col-12 overflow-auto">
+        <table class="table table-striped border rounded-3 shadow" id="employeeTable">
+            <thead style="position: sticky; top: 0; background-color: white; z-index: 1;">
                 <tr>
-                    <th class="text-success" style="width:10%;">Employee ID</th>
-                    <th class="text-success" style="width:20%;">First Name</th>
-                    <th class="text-success" style="width:20%;">Last Name</th>
-                    <th class="text-success" style="width:20%;">Office</th>
-                    <th class="text-success" style="width:10%;">Created At</th>
-                    <th class="text-success" style="width:10%;">Status</th>
-                    <th class="text-success no-print" style="width:25%;"></th>        
+                    <th class="text-success col text-center">Employee ID</th>
+                    <th class="text-success col text-center">First Name</th>
+                    <th class="text-success col text-center">Last Name</th>
+                    <th class="text-success col text-center">Office</th>
+                    <th class="text-success col text-center">Created At</th>
+                    <th class="text-success col text-center">Status</th>
+                    <th class="text-success no-print text-center"></th>        
                 </tr>
             </thead>
             <tbody>
+                <% for(let i = 0; i < 20; i++) { %>
                 <% for (let applicant of applicants) { %>
-                <tr class="applicant-row">
-                    <td class="align-middle"><%= applicant.employeeId %></td>
-                    <td class="align-middle applicant-firstName" style="font-size:0.9em;"><%= applicant.firstName %></td>
-                    <td class="align-middle applicant-lastName" style="font-size:0.9em;"><%= applicant.lastName %></td>
-                    <td class="align-middle applicant-office" style="font-size:0.8em;"><%= applicant.office %></td>
-                    <td class="align-middle" style="font-size:0.9em;"><%= applicant.createdAt.slice(4, 15) %></td>
-                    <td class="align-middle applicant-status" style="font-size:0.9em;"><%= applicant.status %></td>
+                <tr class="applicant-row" style="font-size: 0.9em;">
+                    <td class="align-middle text-center"><%= applicant.employeeId %></td>
+                    <td class="align-middle text-center applicant-firstName" ><%= applicant.firstName %></td>
+                    <td class="align-middle text-center applicant-lastName" ><%= applicant.lastName %></td>
+                    <td class="align-middle text-center applicant-office"><%= applicant.office %></td>
+                    <td class="align-middle text-center" ><%= new Date(applicant.createdAt).toLocaleString() %></td>
+                    <td class="align-middle text-center applicant-status" style="font-size:0.9em;"><%= applicant.status %></td>
                     <td class="no-print">
                         <div class="d-flex mx-0">
                             <a href="/applications/<%= applicant._id %>"><button class="btn btn-sm btn-light border border-success text-success px-3" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-eye"></i></button></a>
@@ -66,7 +77,8 @@
                         </div>
                     </td>
                 </tr>
-                <% } %>   
+                <% } %>
+                <% } %>
             </tbody>
         </table>
     </div>

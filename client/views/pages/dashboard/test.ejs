@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chart.js Example</title>
+  <!-- Include Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div style="width: 20%; margin: 0 auto;">
+    <canvas id="myChart"></canvas>
+  </div>
+    <!-- <div class="ps-3 pt-3" style="font-size: small; display: none;">
+      <p id="employeeCount">32</p>
+      <p id="jobCount">12</p>
+  </div>
+  <div class="ps-3 pt-3" style="font-size: small; display: none;">
+      <p id="casualeCount">45</p>
+      <p id="regularCount">15</p>
+  </div> -->
+  <p id="label1">23</p>
+  <p id="label2">32</p>
+  <p id="label3">23</p>
+  <p id="label4">23</p>
+
+<!-- 
+  <script>
+    // Sample data
+    // const employeeCount = parseInt(document.getElementById('employeeCount').textContent);
+    // const jobOrderCount = parseInt(document.getElementById('jobOrderCount').textContent);
+    // const casualCount = parseInt(document.getElementById('casualCount').textContent);
+    // const regularCount = parseInt(document.getElementById('regularCount').textContent);
+
+    var data = {
+      labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4'],
+      datasets: [{
+        label: 'Sample Data',
+        data: [23, 32, 23, 23],
+        backgroundColor: [
+          'rgba(133, 196, 170, 0.2)',
+          'rgba(196, 133, 133, 0.2)',
+          'rgba(168, 133, 196, 0.2)',
+          'rgba(196, 175, 133, 0.2)'
+        ],
+        borderColor: [
+          'rgba(133, 196, 170, 1)',
+          'rgba(196, 133, 133, 1)',
+          'rgba(168, 133, 196, 1)',
+          'rgba(196, 175, 133, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // Get the canvas element
+    var ctx = document.getElementById('myChart').getContext('2d');
+   
+
+    // Create the chart
+    var myChart = new Chart(ctx, {
+      type: 'bar', // You can change the chart type here (e.g., 'line', 'bar', 'radar', etc.)
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script> -->
+  <script>
+    // Get the values from the paragraphs
+    var label1Value = parseInt(document.getElementById('label1').textContent);
+    var label2Value = parseInt(document.getElementById('label2').textContent);
+    var label3Value = parseInt(document.getElementById('label3').textContent);
+    var label4Value = parseInt(document.getElementById('label4').textContent);
+  
+    // Create the data object
+    var data = {
+      labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4'],
+      datasets: [{
+        label: 'Sample Data',
+        data: [label1Value, label2Value, label3Value, label4Value],
+        // data: ['12', '35', '512', '32'],
+        backgroundColor: [
+          'rgba(133, 196, 170, 0.2)',
+          'rgba(196, 133, 133, 0.2)',
+          'rgba(168, 133, 196, 0.2)',
+          'rgba(196, 175, 133, 0.2)'
+        ],
+        borderColor: [
+          'rgba(133, 196, 170, 1)',
+          'rgba(196, 133, 133, 1)',
+          'rgba(168, 133, 196, 1)',
+          'rgba(196, 175, 133, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+  
+    // Get the canvas element
+    var ctx = document.getElementById('myChart').getContext('2d');
+  
+    // Create the chart
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+   
+   <!-- <script>
+    // Get the canvas element
+    const employeeChartCanvas = document.getElementById('employeeChart');
+    const employeeCount = document.getElementById('employeeCount').textContent;
+    const jobOrderCount = document.getElementById('jobOrderCount').textContent;
+    const casualCount = document.getElementById('casualCount').textContent;
+    const regularCount = document.getElementById('regularCount').textContent;
+
+  
+    // Data from your server
+    const departmentLabels = ['Employees ','Job Order', 'Casual', 'Regular'];
+    const departmentCounts = [employeeCount, jobOrderCount, casualCount, regularCount];
+  
+    // Create the bar chart
+    const employeeChart = new Chart(employeeChartCanvas, {
+      type: 'bar',
+      data: {
+        labels: departmentLabels,
+        datasets: [{
+          label: 'Employee Positions',
+          data: departmentCounts,
+          backgroundColor: [
+        'rgba(133, 196, 170, 0.2)',
+        'rgba(196, 133, 133, 0.2)',
+        'rgba(168, 133, 196, 0.2)',
+        'rgba(196, 175, 133, 0.2)'
+        ],
+        borderColor: [
+        'rgba(133, 196, 170, 1)',
+        'rgba(196, 133, 133, 1)',
+        'rgba(168, 133, 196, 1)',
+        'rgba(196, 175, 133, 1)'
+        ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+
+        scales: {
+        responsive: true,
+            maintainAspectRatio: true,
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script> --> -->
+
+  
+</body>
+</html>

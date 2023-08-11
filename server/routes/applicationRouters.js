@@ -1,18 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ExpressError = require('../../utils/ExpressError');
-
-const applicant = require("../../models/applicant");
-const {
-    viewAllApplicants, 
-    applicantForm, 
-    addApplicant, 
-    viewApplicant,
-    editForm,
-    updateApplicant,
-    rejectApplicant,
-    approveApplicant
-} = require("../controller/applicationController");
+const {viewAllApplicants, applicantForm, addApplicant, viewApplicant,editForm,updateApplicant,rejectApplicant,approveApplicant} = require("../controller/applicationController");
 const {storeReturnTo, isLoggedIn, isAccessible} = require('../../middlewares');
 
 router.get('/applications', isLoggedIn, viewAllApplicants);

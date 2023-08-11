@@ -14,6 +14,11 @@ const UserSchema = new Schema({
         type: String,
         enum: ['admin', 'manager', 'staff' ]
     },
+    uploadedImage: {
+        filename: String,
+        contentType: String,
+        data: Buffer
+    },
 })
 
 UserSchema.plugin(passportLocalMongoose);

@@ -3,19 +3,25 @@
 
     <h3 class="page-header mt-4 ms-3">User Logs</h3>
 
-    <div class="col-10 ms-3">
-        <table class="table table-striped border rounded-3 shadow">
-            <thead>
+    <div class="col-12  overflow-auto" style="max-height:90vh;">
+        <table class="table table-striped border rounded-3 shadow mt-4">
+            <thead style="position: sticky; top: 0; background-color: white; z-index: 1;">
                 <tr>
-                    <th class="text-success">Username</th>
-                    <th class="text-success">Transaction</th>
-                    <th class="text-success">Created At</th>
+                    <th class="text-success" style="width: 15%">Username</th>
+                    <th class="text-success" style="width: 10%">Role</th>
+                    <th class="text-success" style="width: 60%">Transaction</th>
+                    <th class="text-success" style="width: 15%">Created At</th>
                 </tr>
             </thead>
             <tbody>
                 <%for(let transaction of transactions) {%>
                 <tr>
-                    <td class="align-middle text-success" style="font-size:0.9em;"><%= transaction.username %></td>
+                    <td class="align-middle text-success" style="font-size:0.9em;"><%=transaction.username %> 
+                        <% if(transaction.role) { %> 
+                            (<%= textFormat(transaction.role) %>) 
+                        <% } %>
+                    </td>
+                    <td class="align-middle" style="font-size:0.9em;"><%= transaction.role %></td>
                     <td class="align-middle" style="font-size:0.9em;"><%= transaction.transaction %></td>
                     <td class="align-middle" style="font-size:0.9em;"><%= new Date(transaction.createdAt).toLocaleString() %></td>
                 </tr>

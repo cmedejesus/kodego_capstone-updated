@@ -8,37 +8,40 @@
     <div class="w-50 mx-2 bg-light border rounded-3 shadow" style="font-size: 0.8em;">
         <div class="mx-3">
             <h4 class="text-success my-2">Leave Information</h4>
+            <p><em class="text-danger">* required</em></p>
         </div>
         <div class="w-80 m-3">
-            <label for="employeeId" class="form-label">Employee ID: </label>
-            <input type="text" name="leave[employeeId]" id="employeeId" class="form-control" value="<%= employee.employeeId %>">
+            <label for="employeeId" class="form-label">Employee ID:<span class="text-danger">*</span></label>
+            <input type="text" name="leave[employeeId]" id="employeeId" class="form-control" value="<%= employee.employeeId %>" required>
             
-            <label for="firstName" class="form-label mt-2">First Name: </label>
-            <input type="text" name="leave[firstName]" id="firstName" class="form-control" value="<%= employee.firstName %>">
+            <label for="firstName" class="form-label mt-2">First Name:<span class="text-danger">*</span></label>
+            <input type="text" name="leave[firstName]" id="firstName" class="form-control" value="<%= employee.firstName %>" required>
             
-            <label for="lastName" class="form-label mt-2">Last Name: </label>
-            <input type="text" name="leave[lastName]" id="lastName" class="form-control" value="<%= employee.lastName %>">
+            <label for="lastName" class="form-label mt-2">Last Name:<span class="text-danger">*</span></label>
+            <input type="text" name="leave[lastName]" id="lastName" class="form-control" value="<%= employee.lastName %>" required>
             
             <div class="d-flex align-items-center mt-3">
                 <div class="me-2">
-                    <label for="leaveStart" class="form-label">Start: </label>
-                <input type="date" name="leave[leaveStart]" id="leaveStart" class="form-control">
+                    <label for="leaveStart" class="form-label">Start:<span class="text-danger">*</span></label>
+                <input type="date" name="leave[leaveStart]" id="leaveStart" class="form-control" required>
                 </div>
                 <div class="me-2">
-                    <label for="leaveEnd" class="form-label">End: </label>
-                    <input type="date" name="leave[leaveEnd]" id="leaveEnd" class="form-control">
+                    <label for="leaveEnd" class="form-label">End:<span class="text-danger">*</span></label>
+                    <input type="date" name="leave[leaveEnd]" id="leaveEnd" class="form-control" required>
                 </div>
                 <div>
-                    <label for="leaveType" class="form-label">Leave Type: </label>
-                    <select name="leave[leaveType]" id="leave[leaveType]" class="form-control align-middle w-100">
-                        <option value="" class="text-muted" selected>Select</option>
-                        <option value="Sick Leave" class="text-muted">Sick Leave</option>
-                        <option value="Vacation Leave" class="text-muted">Vacation Leave</option>
+                    <label for="leaveType" class="form-label">Leave Type:<span class="text-danger">*</span></label>
+                    <select name="leave[leaveType]" id="leave[leaveType]" class="form-control align-middle w-100" required>
+                        <option value="" class="text-muted" disabled selected>Select</option>
+                        <option value="" selected>All</option>
+            <% for (let type of leaveTypes) { %>
+                <option value="<%= type %>"><%= type %></option>
+            <% } %>
                     </select>
                 </div>
             </div>
             <div class="my-3">
-                <label for="firstName" class="form-label ">Notes / Remarks: </label>
+                <label for="firstName" class="form-label ">Notes / Remarks:</label>
                 <textarea cols="50" rows="5" name="leave[remarks]" id="firstName" class="form-control" style="resize:none"></textarea>
             </div>
             <div class="my-3 d-flex justify-content-center">

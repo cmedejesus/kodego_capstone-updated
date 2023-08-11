@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {isLoggedIn, isAccessible} = require('../../middlewares');
 
 const { transactionViews } =  require('../controller/transactionController');
+const {isLoggedIn, isAccessible, isAuthorizedBy} = require('../../middlewares');
 
-router.get('/reports', isLoggedIn, isAccessible, transactionViews)
+router.get('/reports', isLoggedIn, isAuthorizedBy, transactionViews)
 
 module.exports = router

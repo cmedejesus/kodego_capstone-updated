@@ -1,0 +1,17 @@
+module.exports = [
+        'Sick Leave',
+        'Vacation Leave',
+        'Mandatory/Forced',
+        'Maternity Leave',
+        'Paternity Leave',
+        'Special Priviledge',
+        'Solo Parent',
+        'Study Leave',
+        'VAWC Leave',
+        'Rehabilitation',
+        'Special Leave for Women',
+        'Special Emergency/Calamity',
+        'Terminal Leave',
+        'Adoption Leave',
+        'Monetization of Leave Credits',
+]

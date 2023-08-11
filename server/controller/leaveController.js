@@ -2,19 +2,20 @@ const mongoose = require('mongoose');
 const catchAsync = require('../../utils/catchAsync');
 const Employee = require('../../models/employee');
 const Leave = require('../../models/leave');
+const leaveTypes = require('../../seeds/leaveTypes');
 
 const activePage = '/leave-management'
 
 exports.viewLeaveManagement = async (req, res) => {
     const leaves = await Leave.find({})
     
-    res.render('pages/leave/leaveManagement', {activePage, leaves});
+    res.render('pages/leave/leaveManagement', {activePage, leaves, leaveTypes});
 }
 
 exports.leaveForm = catchAsync(async (req, res) => {
     const {id} = req.params;
     const employee = await Employee.findById(id).populate('leaves');
-    res.render('pages/leave/newLeaveForm', {activePage, employee});
+    res.render('pages/leave/newLeaveForm', {activePage, employee, leaveTypes});
 })
 
 // Add leave to the employee
@@ -40,7 +41,6 @@ exports.viewLeave = catchAsync(async (req, res) => {
 
 // View Update Leave Form 
 exports.updateLeaveForm = async (req, res) => { 
-    const leaveTypes = ['Sick Leave', 'Vacation Leave'] 
     const id = req.params.id 
     const leave = await Leave.findById(id); 
     res.render('pages/leave/leave-edit', {leave, activePage, leaveTypes}); 

@@ -2,42 +2,74 @@
 <div class="my-3">
     <h3 class="page-header mt-4 ms-3">Leave Information</h3>
 </div>
-<div class="m-3 card col-md-8 shadow">
-    <div class="d-flex align-items-center">
-        <div>
-            <a class="btn btn-light border border-success text-success ms-2" href="/leave-management/<%= leaver.id %>/update-leave-form">Edit</a>  
-            <form action="/leave-management/<%= leaver.id %>?_method=DELETE" method="POST">
-                <button class="btn btn-danger">Delete</button>
-            </form>
-          
-            <div class="card-text my-2">
-                <span class="ms-3">Employee Name:</span>
-                <span class="ps-1 text-success"><%= leaver.firstName %> <%= leaver.lastName %></span>
-                <span class="ms-3">Employee ID:</span>
-                <span class="ps-1 text-success"><%= leaver.employeeId %></span>
-                <span class="ms-3">Leave Type:</span>
-                <span class="ps-1 text-success"><%= leaver.leaveType %></span>
-            </div>
-           
-            <div class="card-text my-2">
-                <span class="ms-3">Leave Start Date:</span>
-                <span class="ps-1 text-success"><%= leaver.leaveStart %></span>
-                <span class="ms-3">Leave End Date:</span>
-                <span class="ps-1 text-success"><%= leaver.leaveEnd %></span>
-            </div>
-        
-            <div class="card-text my-2">
-                <span class="ms-3">Remarks:</span>
-                <span class="ps-1 text-success"><%= leaver.remarks %></span>
-            </div>
-            <div class="card-text my-2">
-                <span class="ms-3">Status:</span>
-                <span class="ps-1 text-success"><%= leaver.status%></span>
-            </div>
-            
-        </div>
-        
+
+
+<div class="m-3 card py-4 col-md-9 shadow position-relative ">
+    <div class="">
+        <h4 class="text-success ms-3">Details</h4>
     </div>
+    <div class="d-flex"  style="font-size: 0.9em;">
+        <div class="col-3">
+            <div class="card-text my-2">
+                <span class="ms-3 text-success">Employee Name:</span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3 text-success">Employee ID:</span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3 text-success">Leave Type:</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card-text my-2">
+                <span class="ps-1"><%= leaver.firstName %> <%= leaver.lastName %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ps-1"><%= leaver.employeeId %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ps-1"><%= leaver.leaveType %></span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card-text my-2">
+                <span class="ms-3 text-success">Leave Start Date:</span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3 text-success">Leave End Date:</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card-text my-2">
+                <span class="ps-1"><%= leaver.leaveStart %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ps-1"><%= leaver.leaveEnd %></span>
+            </div>
+        </div>
+    </div>
+        <div class="card-text my-2"  style="font-size: 0.9em;">
+            <div class="ms-3 text-success">Remarks:</div>
+            <div class="ms-3 ps-1"><%= leaver.remarks %></div>
+        </div>
+        <div class="position-absolute bottom-0 end-0 mb-2 me-2">
+
+            <div class="d-flex flex-row gap-1">
+                <div>
+                    <a class="btn btn-light border border-success text-success ms-2" href="/leave-management/<%= leaver.id %>/update-leave-form" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></a>  
+            
+                </div>
+                <div>
+                    <form action="/leave-management/<%= leaver.id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Delete"><i class="bi bi-trash"></i></button>
+                    </form>
+            
+                </div>
+            
+            </div>
+        </div>
+</div>
+    
 </div>
 <a href="/leave-management">
     <button class="btn btn-light border border-success text-success ms-4">Back</button>

@@ -4,7 +4,7 @@
     <h3 class="page-header mt-4 ms-3">Employees</h3>
 </div>
 <div class="ms-3 mb-3">
-    <a href="/employees/form"><button class="btn btn-success">Add Employee</button></a>
+    <a href="/employees/form"><button class="btn btn-success"><i class="bi bi-person-add pe-3"></i>Add Employee</button></a>
 </div>
 
 <div class="d-flex col-12 justify-content-between mx-3">
@@ -29,14 +29,12 @@
         </select>
     </div>
     <div class="d-flex justify-content-end mb-2">
-            <div id="printButton"><button class="btn btn-light me-2" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Print Table"><i class="bi bi-printer"></i></button></div>
-            <input type="text" class="form-control me-2 me-5" id="searchInput" placeholder="Search for a name">
-
+            <div id="printButton"><button class="btn btn-light border border-secondary me-2" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Print Table"><i class="bi bi-printer"></i></button>
+            </div>
+            <input type="text" class="form-control me-2 me-5" id="searchInput" placeholder="Search Name...">
     </div>  
-   
-    
 </div>
-
+ 
 
 <section class="d-flex mx-3 mb-5" style="max-height:75vh;">
     <div class="col-12 overflow-auto">
@@ -62,7 +60,7 @@
                     <td class="align-middle text-center employee-office" style="font-size:0.9em;"><%=employee.office  %></td>
                     <td class="align-middle text-center employee-status <%- employee.isActive === true ? 'text-success' : 'text-danger' %>" style="font-size:0.9em;"><%= employee.isActive === true ? 'Active' : 'Inactive' %></td>
                     
-                    <td class="status no-print">
+                    <td class="status no-print"> 
                         <div class="actions col d-flex justify-content-center">
                             <a href="/employees/<%=employee._id %>"><button class="btn btn-sm px-3 ms-1" style="font-size: 1.2em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-eye"></i></button></a>
                             
@@ -89,4 +87,5 @@
  
     </div>
 </section>
+
 

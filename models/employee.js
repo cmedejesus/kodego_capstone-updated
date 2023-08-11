@@ -30,26 +30,20 @@ const employeesSchema = new Schema({
     tinId: String,
     designation: String,
     dateStart: String,
-
     isActive: {
         type: Boolean,
         default: true
     },
-    
-    status: {
-        type: String,
-        default: 'Active'
+    uploadedImage: {
+        filename: String,
+        contentType: String,
+        data: Buffer
     },
+    // status: {
+    //     type: String,
+    //     default: 'Active'
+    // },
     // For Leave management relationship
-    leaveBalance: {
-        type: Number,
-        default: 10
-    },
-    approvedLeaves: Number,
-    pendingLeaves: Number, 
-    leavesHistory: {
-        type: String
-    },
     leaves: [ 
         {
             type: Schema.Types.ObjectId,
@@ -61,9 +55,7 @@ const employeesSchema = new Schema({
         type: Date,
         default: Date.now(),
     }
-    
-  
-   
+     
 })
 
 module.exports = mongoose.model('Employee', employeesSchema);

@@ -1,58 +1,70 @@
 <% layout('/layouts/boilerplate') %>
 
-    <div class="my-3">
-        <h3 class="page-header mt-4 ms-3">Leave Management</h3>
+<div class="my-3">
+    <h3 class="page-header mt-4 ms-3">Leave Management</h3>
+</div>
+    
+<div class="d-flex col-12 justify-content-between mx-3 my-2">
+    <div class="d-flex">
+        <select name="role" id="roleFilter" class="rounded px-2" required>
+            <option value="" selected>All</option>
+            <% for (let type of leaveTypes) { %>
+                <option value="<%= type %>"><%= type %></option>
+            <% } %>
+        </select>
     </div>
-
-    <div class="d-flex col-10 justify-content-between mx-3">
-        <div class="">
-            <a href="/leave-management/new-leave-request"><button class="btn btn-success">Request Leave</button></a>
+    
+    <div class="d-flex">
+        <div id="printButton">
+            <button class="btn btn-light border border-secondary me-2" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Print Table"><i class="bi bi-printer"></i></button>
         </div>
-        <div class="d-flex justify-content-end mb-2">
-            <form action="" class="d-flex me-4">
-                <input type="text" class="form-control me-2" id="searchInput">
-                <button class="btn btn-success"><i class="bi bi-search text-light"></i></button>
-            </form>
-        </div>  
+            <input type="text" class="form-control me-2 me-5" id="searchInput" placeholder="Search Name...">
     </div>
+        
+    
+    
+</div>   
 
-<div class=" col-md-12 col-lg-10" style="max-height: 80%">
-        <table class="table table-striped border rounded-3">
-            <thead>
-                <tr class="align-middle style="font-size: 0.9em;">
-                    <th class="text-success" style="width:15%;">Employee ID</th>
-                    <th class="text-success" style="width:20%;">Name</th>
-                    <th class="text-success" style="width:15%;">Office</th>
-                    <th class="text-success" style="width:12%;">Leave Start</th>
-                    <th class="text-success" style="width:12%;">Leave End</th> 
-                    <th class="text-success" style="width:10%;">Type</th>         
-                    <th class="text-success" style="width:10%;"></th>      
+<div class="d-flex mx-3 mb-5" style="max-height:80vh;">
+    <div class="col-12 overflow-auto">
+        <table class="table table-striped border rounded-3 shadow" id="employeeTable">
+            <thead style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                <tr>
+                    <th class="text-success col text-center">Employee ID</th>
+                    <th class="text-success col text-center">Name</th>
+                    <th class="text-success col text-center">Leave Start</th>
+                    <th class="text-success col text-center">Leave End</th>
+                    <th class="text-success col text-center">Type</th>         
+                    <th class="text-success col text-center">Remarks</th>      
+                    <th class="text-success col text-center no-print"></th>
                 </tr>
             </thead>
             <tbody>
+                <% for(let i = 0; i < 50; i++) { %>
                 <%  for(let leave of leaves) { %>
-                <tr class="align-middle employee-row" style="font-size: 0.8em;">
-                    <td><%= leave.employeeId %></td>
-                    <td class="employee-firstName"><%= leave.firstName %> <%= leave.lastName %></td>
-                    <td><%= leave.office %></td>
-                    <td><%= leave.leaveStart %></td>
-                    <td><%= leave.leaveEnd %></td>
-                    <td><%= leave.type %></td>
-                    
-                    <td>
+                <tr class="align-middle employee-row" style="font-size: 0.9em;">
+                    <td class="align-middle text-center"><%= leave.employeeId %></td>
+                    <td class="align-middle text-center"><%= leave.firstName %> <%= leave.lastName %></td>
+                    <td class="align-middle text-center"><%= leave.leaveStart %></td>
+                    <td class="align-middle text-center"><%= leave.leaveEnd %></td>
+                    <td class="align-middle text-center"><%= leave.leaveType %></td>
+                    <td class="align-middle text-center"><%= leave.remarks %></td>
+                    <td class="no-print">
                         <div class="actions mx-0 d-flex align-middle">
-                            <a href="/leave-management/<%= leave._id %>"><button class="btn btn-sm btn-light border border-success px-3 me-1" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-search"></i></button></a>
-                            <button class="btn btn-sm btn-success ms-2" data-toggle="tooltip" data-placement="top" title="Approve"><i class="bi bi-check-lg"></i></button>
-                            <button class="btn btn-sm btn-danger mx-1" data-toggle="tooltip" data-placement="top" title="Reject"><i class="bi bi-x-lg"></i></button>
-                            <button class="btn btn-sm btn-light border border-danger text-danger ms-2" data-toggle="tooltip" data-placement="top" title="Delete"><i class="bi bi-trash"></i></button>
+
+                            <a href="/leave-management/<%= leave._id %>"><button class="btn btn-sm px-3 ms-1" style="font-size: 1.2em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-eye"></i></button></a>
+                            <a href="/leave-management/<%= leave._id %>/update-leave-form"><button class="btn btn-sm ms-1" style="font-size:1em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
+                            <% if(currentUser && currentUser.role === 'manager' || currentUser.role === 'admin') { %>
+                            <form action="/leave-management/<%= leave.id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-light border border-danger text-danger ms-2" data-toggle="tooltip" data-placement="top" title="Delete"><i class="bi bi-trash"></i></button>
+                            </form>
+                            <% } %>
                         </div>
-                    
                     </td>
                 </tr>
+                <% } %>
                 <% } %>
             </tbody>
         </table>
     </div>
-    
- 
 </div>

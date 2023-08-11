@@ -1,7 +1,25 @@
 body {
     background: linear-gradient(45deg, #D7FFDD, #F5FFED, #E3F6E8, #E3F6E8, #E3F6E8);
+    font-family: 'Roves Sans', sans-serif ;
+  }
+
+  h4, h3 {
+    font-weight: 600;
   }
   
+  h2 {
+    font-weight: 700;
+    color: #017119;
+  }
+
+  .gray-text {
+    color: #ADADAD;
+  }
+
+  .gray-text:hover{
+    color: #999999;
+  }
+
 .page-header {
   background: linear-gradient(to right, #37B353, #40734B, #40734B, #40734B  );
   -webkit-background-clip: text; /* For Safari/Chrome */
@@ -9,10 +27,21 @@ body {
   color: transparent;
 }
 
+.picture-upload {
+  opacity: 0;
+}
+
+.picture-upload:hover {
+  background-color: rgb(108, 117, 125, 0.5);
+  transition: 0.3s;
+  opacity: 1;
+}
+
+
 .sidebar {
   padding: 20px;
-  background: #E3F6E8;
-  mix-blend-mode: multiply;
+  background: #ccffda;
+ 
 }
 
 /* Styling for the sidebar heading */
@@ -48,10 +77,27 @@ body {
   color: #37B353 ;
 }
 
+.delete {
+  color: #e1736d;
+}
+
+.delete:hover {
+  color: #ab3636;
+}
+
   /* Card styling */
 .card-head {
   color: #017119
 }
+
+.photo-upload {
+ opacity: 0;
+}
+
+.photo-upload:hover {
+  opacity: 1;
+}
+
 
 /* .actions {
  opacity: 0;

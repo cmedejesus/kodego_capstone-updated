@@ -7,9 +7,9 @@ document.getElementById('printButton').addEventListener('click', function () {
             tr {
                 margin-top: 20px; 
                 margin-bottom: 20px; 
-            }`
+            }
            
-        
+        `
     });
 });
 // Hover on the print button event listener
