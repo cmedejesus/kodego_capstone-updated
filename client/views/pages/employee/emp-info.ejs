@@ -1,0 +1,203 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="my-3">
+    <h3 class="page-header mt-4 ms-3">Employee Information</h3>
+</div>
+<div class="ms-3 mb-3">
+    <a href="/leave-management/<%= employee.id %>/new-leave-request"><button class="btn btn-success">Add Employee Leave</button></a>
+</div>
+<div class="position-absolute top-0 end-0 mt-5 pt-4 me-3">
+    <a href="/employees" class="btn backbtn mx-1 ps-3 pe-3"><i class="bi bi-arrow-90deg-left me-2"></i>Back</a>
+</div>
+
+<div class="m-3 card shadow">
+    <div class="d-flex">
+        <div class="d-flex align-items-center m-3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0aX49p2Q3ZJDmmhQl1aB1C3vJBfDhukMQPdaxiRAQyDwdauNY9dvV0CIqwYC1QsrAQj4&usqp=CAU" alt="bgfiller" 
+            class="img-fluid rounded-circle bg-light shadow position-relative"
+            style="height:100px;width:100px;">
+            <img src="" alt="" 
+            class="img-fluid rounded-circle bg-light shadow position-absolute"
+            style="height:100px;width:100px; object-fit: cover;"
+            onerror="this.style.display='none';">
+        </div>
+    <div class="d-flex align-items-center">
+        <div>
+            <div class="card-text my-2">
+                <span class="ms-3 <%- employee.isActive === true ? 'text-success' : 'text-danger' %>"><%= employee.isActive === true ? 'Active' : 'Inactive' %></span>
+            </div> 
+            <div class="card-text my-2">
+                
+                <span class="ms-3 fs-5 text-success"><%= employee.firstName %> <%= employee.lastName %> </span>
+                <span> - <%= employee.position %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3"><%= employee.office %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3"><%= employee.designation %></span>
+            </div>
+        </div>
+
+        <div class="position-absolute end-0 top-0 mt-2 me-3">
+
+            <div class="d-flex flex-row align-items-center">
+                <div>
+                    <a href="/employees/<%= employee._id %>/leave-history"><button class="btn btn-sm ms-1" style="font-size:1.2em;" data-toggle="tooltip" data-placement="top" title="Leave History"><i class="bi bi-clock-history"></i></button></a></a>
+                </div>
+                <div>
+                    <a href="/employees/<%= employee._id %>/update-employee-form"><button class="btn btn-sm ms-1" style="font-size:1.2em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
+                </div>
+                <div>
+                    <% if(currentUser && currentUser.role === 'manager' || currentUser.role === 'admin') { %>
+                    <% if(employee.isActive === true) { %>
+                        <form action="/employees/<%= employee._id %>/deactivate?_method=PATCH" method="POST">
+                            <a href=""><button class="btn btn-sm deactivate ms-1" style="font-size:1.5em;" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Deactivate"><i class="bi bi-toggle2-on"></i></button></a>
+                        </form>
+                        <% } %>
+                    <% if(employee.isActive === false) { %>
+                        <form action="/employees/<%= employee._id %>/activate?_method=PATCH" method="POST">
+                            <a href=""><button class="btn btn-sm activate ms-1" style="font-size:1.5em;" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Activate"><i class="bi-toggle2-off"></i></button></a>
+                        </form>
+                    <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    <div class="border-top">
+        <div class="d-flex" style="font-size: 0.9em;">
+            <div class="card-body pt-1 ps-1  pe-0 col-3 me-0"> 
+              
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Street:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Barangay:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">City:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Province:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Zip / Postal Code:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Phone Number:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Phone Number 2:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Email Address:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Emergency Contact Person:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Contact Number:</span>
+                </div>
+            </div>
+            <div class="card-body pt-1 pe-1 ps-0 col-3 ms-0">
+                
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.street %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.barangay %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.city %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.province %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.postalCode %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.phoneNumber %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.phoneNumber2 %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.email %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.emergContactPer %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.emerPhone %></span>
+                </div>
+            </div>
+
+            <div class="card-body pt-1 ps-1 pe-0 col-3 me-0">
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Employee ID:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Department:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Role Title:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Employment Start:</span>
+                </div>
+                <div class="border border-end-0 rounded-start me-0">
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">SSS ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">GSIS ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">PhilHealth ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">PagIbig ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">TIN:</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-1 pe-1 ps-0 col-3 ms-0">
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.employeeId %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.office %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.designation %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= employee.dateStart %></span>
+                </div>
+                <div class="border border-start-0 rounded-end ms-0">
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= employee.sssId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= employee.gsisId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= employee.philHealthId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= employee.pagibigId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= employee.tinId %></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

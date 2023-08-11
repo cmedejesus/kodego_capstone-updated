@@ -1,0 +1,133 @@
+body {
+    background: linear-gradient(45deg, #D7FFDD, #F5FFED, #E3F6E8, #E3F6E8, #E3F6E8);
+  }
+  
+.page-header {
+  background: linear-gradient(to right, #37B353, #40734B, #40734B, #40734B  );
+  -webkit-background-clip: text; /* For Safari/Chrome */
+  background-clip: text;
+  color: transparent;
+}
+
+.sidebar {
+  padding: 20px;
+  background: #E3F6E8;
+  mix-blend-mode: multiply;
+}
+
+/* Styling for the sidebar heading */
+.sidebar .grey {
+  color: #333;
+}
+
+/* Styling for the sidebar links */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #838383;
+}
+
+.sidebar a:hover {
+  color: #37B353;
+}
+
+.sidescroll{
+  color: #37B353;
+}
+
+/* for the Active page Style */
+.active {
+  color: #37B353 ;
+}
+
+  /* Card styling */
+.card-head {
+  color: #017119
+}
+
+/* .actions {
+ opacity: 0;
+}
+
+tr:hover .actions  {
+  transition: 0.1s;
+  opacity: 1;
+} */
+
+.activate {
+  color: red;
+}
+
+.activate:hover {
+  scale: 1.2;
+  color: green;
+}
+
+.deactivate {
+  color: green;
+}
+
+.deactivate:hover {
+  scale: 1.2;
+  color: red;
+}
+
+
+.loginNav {
+  height: 70px;
+  background: #E3F6E8;
+  mix-blend-mode: multiply;
+}
+
+.loginMain {
+  background-image: url("/images/loginBg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.login-container {
+  width: 400px;
+  height: 600px;
+  background-color: rgb(247, 247, 247, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.login-container img {
+  width: 120px;
+}
+
+.loginContent h1 {
+  font-size: 5em;
+  color: rgb(42, 44, 45, 0.8);
+}
+.loginContent h2 {
+  font-size: 3em;
+  color: rgb(42, 44, 45, 0.8);
+}
+
+.backbtn {
+  background-color:rgb(18, 132, 171);
+  color:#fff;
+}
+.backbtn:hover {
+  background-color:rgb(16, 96, 123);
+  color:#fff;
+}
+
+.success {
+  background: linear-gradient(to right, #acefbd, #73d990,#73d975, #73d990, #acefbd  )
+}
+
+.error {
+  background: linear-gradient(to right, #efacac, #d97373,#d66969, #e3918d, #e7a79e  )
+}

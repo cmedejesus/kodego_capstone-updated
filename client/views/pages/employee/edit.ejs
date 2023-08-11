@@ -1,0 +1,151 @@
+<% layout('/layouts/boilerplate') %>
+
+<div>
+    <h3 class="my-3 page-header mt-4 ms-3">Update Employee</h3>
+</div>
+
+<form action="/employees/<%= employee._id %>/update?_method=PATCH" method="POST" novalidate class="validated-form">
+    <div class="d-flex">
+        <div class="w-50 mx-2 border rounded-3 shadow bg-light" style="height:fit-content; font-size: 0.8em;">
+            <div class="mx-3">
+                <h4 class="text-success my-2">Personal Information</h4>
+            </div>
+            <div class="w-80 m-3">
+                <label for="firstName" class="form-label ">First Name: </label>
+                <input type="text" name="employee[firstName]" id="firstName" class="form-control" value="<%= employee.firstName %>">
+
+                <label for="lastName" class="form-label mt-2">LastName: </label>
+                <input type="text" name="employee[lastName]" id="lastName" class="form-control" value="<%= employee.lastName %>">
+
+                <div class="d-flex align-items-center mt-3">
+                    <label for="age" class="form-label align-middle me-2">Age: </label>
+                    <input type="number" name="employee[age]" id="age" class="form-control w-25 me-2" value="<%= employee.age %>">
+
+                    <label for="birthdate" class="form-label align-middle me-2">Birthdate: </label>
+                    <input type="date" name="employee[birthdate]" id="birthdate" class="form-control w-50" value="<%= employee.birthdate %>">
+                </div>
+
+                <label for="email" class="form-label align-middle me-2 mt-3">Email: </label>
+                <input type="email" name="employee[email]" id="email" class="form-control" value="<%= employee.email %>">
+                
+                <label for="street" class="form-label mt-3"> Street Address: </label>
+                <input type="text" name="employee[street]" id="street" class="form-control" value="<%= employee.street %>">
+
+                <label for="barangay" class="form-label mt-3"> Barangay: </label>
+                <input type="text" name="employee[barangay]" id="barangay" class="form-control" value="<%= employee.barangay %>">
+
+                <label for="city" class="form-label mt-3"> City: </label>
+                <input type="text" name="employee[city]" id="city" class="form-control" value="<%= employee.city %>">
+
+                <div class="d-flex align-items-center mt-3">
+                    <div class="me-2">
+                        <label for="province" class="form-label">Province </label>
+                    <input type="text" name="employee[province]" id="province" class="form-control" value="<%= employee.province %>">
+                    </div>
+                    <div>
+                        <label for="postalCode" class="form-label">Zip/ Postal Code: </label>
+                        <input type="number" name="employee[postalCode]" id="postalCode" class="form-control" value="<%= employee.postalCode %>">
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+
+        <div class="w-50">
+            <div class="m-2 mt-0 border rounded-3 shadow bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div class="mx-3">
+                    <h4 class="text-success my-2">Contact Information</h4>
+                </div>
+                <div class="w-80 m-3">
+                    <label for="phoneNumber" class="form-label mt-3">Phone Number: </label>
+                    <input type="text" name="employee[phoneNumber]" id="phoneNumber" class="form-control" value="<%= employee.phoneNumber %>">
+                    
+                    <label for="phoneNumber2" class="form-label mt-2">Phone Number 2: </label>
+                    <input type="text" name="employee[phoneNumber2]" id="phoneNumber2" class="form-control" value="<%= employee.phoneNumber2 %>">
+                </div>
+            </div>
+            <div class="mx-2 border rounded-3 shadow bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div>
+                    <div class="mx-3">
+                        <h4 class="text-success my-2">Identification</h4>
+                    </div>
+                    <div class="w-80 m-3">
+
+                        <label for="sssId" class="form-label mt-2">SSS ID: </label>
+                        <input type="text" name="employee[sssId]" id="sssId" class="form-control" value="<%= employee.sssId %>">
+                        
+                        <label for="gsisId" class="form-label mt-2">GSIS ID: </label>
+                        <input type="text" name="employee[gsisId]" id="gsisId" class="form-control" value="<%= employee.gsisId %>">
+                        
+                        <label for="philHealthId" class="form-label mt-2">Phil Health ID: </label>
+                        <input type="text" name="employee[philHealthId]" id="philHealthId" class="form-control" value="<%= employee.philHealthId %>">
+                        
+                        <label for="pagibigId" class="form-label mt-2">Pag-ibig ID: </label>
+                        <input type="text" name="employee[pagibigId]" id="pagibigId" class="form-control" value="<%= employee.pagibigId %>">
+        
+                        <label for="tinId" class="form-label mt-2">TIN ID: </label>
+                        <input type="text" name="employee[tinId]" id="tinId" class="form-control" value="<%= employee.tinId %>">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-50">
+            <div class="mx-2 border rounded-3 shadow bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div class="mx-3">
+                    <h4 class="text-success my-2">Designation</h4>
+                </div>
+                <div class="w-80 m-3">
+                    <label for="office" class="form-label mt-2">Office: </label>
+                    <select name="employee[office]" id="office" class="form-control">
+                        <option value="" selected>-Select Office</option>
+                        <% for(let office of offices)  { %>
+                            <option value="<%= office.office %>"<%= employee.office === office.office? 'selected':'' %>><%= office.office %></option>
+                            <% } %>
+                    </select>
+                    
+                    <label for="position" class="form-label mt-2">Position: </label>
+                    <select name="employee[position]" id="position" class="form-control">
+                        <option value="">-Select Position</option>
+                        <% for(let position of positions)  {%>
+                            <option value="<%= position %>"<%= employee.position === position? 'selected':''  %>><%= position %></option>     
+                            <% } %>
+                    </select>
+
+                    <label for="designation" class="form-label mt-2">Designation: </label>
+                    <select name="employee[designation]" id="designation" class="form-control">
+                        <option value="" selected>-Select Designation</option>
+                        <% for(let designation of designations)  {%>
+                            <option value="<%= designation %>"<%= employee.designation === designation? 'selected': ''  %>><%= designation %></option>
+                            <% } %>
+                    </select>
+                    <br>
+
+                    <label for="dateStart" class="form-label align-middle me-2">Date Start: </label>
+                    <input type="date" name="employee[dateStart]" id="dateStart" class="form-control w-50" value="<%= employee.dateStart %>">
+                </div>
+            </div>
+            <div class="m-2 border rounded-3 shadow bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div class="mx-3">
+                    <h4 class="text-success my-2">Emergency Contact</h4>
+                </div>
+                <div class="w-80 m-3">
+                    <label for="emergContactPer" class="form-label mt-2">Contact Person: </label>
+                    <input type="text" name="employee[emergContactPer]" id="emergContactPer" class="form-control" value="<%= employee.emergContactPer %>">
+                    
+                    <label for="emerPhone" class="form-label mt-2">Contact Number: </label>
+                    <input type="text" name="employee[emerPhone]" id="emerPhone" class="form-control" value="<%= employee.emerPhone %>">
+                    <label for="emerRelation" class="form-label mt-2">Relation: </label>
+                    <input type="text" name="employee[emerRelation]" id="emerRelation" class="form-control w-50" value="<%= employee.emerRelation %>">
+                </div>
+            </div>
+         
+            
+        </div>
+    </div>
+    <div class="position-absolute top-0 end-0 mt-3 me-3">
+        <button class="btn btn-success mx-1 ps-3 pe-3"><i class="bi bi-envelope-plus me-2"></i>Submit</button>
+        <a href="/employees/<%= employee._id %>" class="btn backbtn mx-1 ps-3 pe-3"><i class="bi bi-arrow-90deg-left me-2"></i>Back</a>
+    </div>
+</form>
+

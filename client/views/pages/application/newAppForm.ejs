@@ -1,0 +1,153 @@
+<% layout('/layouts/boilerplate') %>
+<% const activePage = '/applications' %>
+<div>
+    <h3 class="my-3 page-header mt-1 ms-3">New Applicant</h3>
+</div>
+
+<form action="/applications" method="POST" novalidate class="validated-form">
+    <div class="d-flex">
+        <div class="w-50 mx-2 border rounded-3 shadow-sm bg-light" style="height:fit-content; font-size: 0.8em;">
+            <div class="mx-3">
+                <h4 class="text-success my-2">Personal Information</h4>
+                <span class="" style="font-size: 0.8em;"><em class="text-danger">*required</em></span>
+            </div>
+            <div class="w-80 m-3">
+                <label for="firstName" class="form-label ">First Name:<span><em class="text-danger">*</em></span></label>
+                <input type="text" name="applicant[firstName]" id="firstName" class="form-control" required>
+
+                <label for="lastName" class="form-label mt-1">Last Name:<span><em class="text-danger">*</em></span></label>
+                <input type="text" name="applicant[lastName]" id="lastName" class="form-control" required>
+
+                <div class="d-flex align-items-center mt-3">
+                    <label for="age" class="form-label align-middle me-2">Age:<span><em class="text-danger">*</em></span></label>
+                    <input type="number" name="applicant[age]" id="age" class="form-control w-25 me-2" required>
+
+                    <label for="birthdate" class="form-label align-middle me-2">Birthdate:<span><em class="text-danger">*</em></span></label>
+                    <input type="date" name="applicant[birthdate]" id="birthdate" class="form-control w-50" required>
+                </div>
+
+                <label for="email" class="form-label align-middle me-2 mt-2">Email:<span><em class="text-danger">*</em></span></label>
+                <input type="email" name="applicant[email]" id="email" class="form-control" required>
+                
+                <label for="address" class="form-label mt-2"> Street Address:<span><em class="text-danger">*</em></span></label>
+                <input type="text" name="applicant[street]" id="address" class="form-control" required>
+
+                <label for="barangay" class="form-label mt-2"> Barangay:<span><em class="text-danger">*</em></span></label>
+                <input type="text" name="applicant[barangay]" id="barangay" class="form-control" required>
+
+                <label for="city" class="form-label mt-2"> City:<span><em class="text-danger">*</em></span></label>
+                <input type="text" name="applicant[city]" id="city" class="form-control" required>
+
+                <div class="d-flex align-items-center mt-3">
+                    <div class="me-2">
+                        <label for="province" class="form-label">Province<span><em class="text-danger">*</em></span></label>
+                    <input type="text" name="applicant[province]" id="province" class="form-control" required>
+                    </div>
+                    <div>
+                        <label for="postalCode" class="form-label">Zip/ Postal Code:<span><em class="text-danger">*</em></span></label>
+                        <input type="number" name="applicant[postalCode]" id="postalCode" class="form-control" required>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="w-50">
+            <div class="m-2 mt-0 border rounded-3 shadow-sm bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div class="mx-3">
+                    <h4 class="text-success my-2">Contact Information</h4>
+                </div>
+                <div class="w-80 m-3">
+                    <label for="phoneNumber" class="form-label mt-1">Phone Number:<span><em class="text-danger">*</em></span></label>
+                    <input type="number" name="applicant[phoneNumber]" id="phoneNumber" class="form-control" required>
+                    
+                    <label for="phoneNumber2" class="form-label mt-1">Phone Number 2: </label>
+                    <input type="number" name="applicant[phoneNumber2]" id="phoneNumber2" class="form-control">
+                </div>
+            </div>
+            <div class="mx-2 border rounded-3 shadow-sm bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div>
+                    <div class="mx-3">
+                        <h4 class="text-success my-2">Identification</h4>
+                    </div>
+                    <div class="w-80 m-3">
+                        <label for="sssId" class="form-label mt-1">SSS ID: </label>
+                        <input type="text" name="applicant[sssId]" id="sssId" class="form-control">
+                        
+                        <label for="gsisId" class="form-label mt-1">GSIS ID: </label>
+                        <input type="text" name="applicant[gsisId]" id="gsisId" class="form-control">
+                        
+                        <label for="philHealthId" class="form-label mt-1">Phil Health ID: </label>
+                        <input type="text" name="applicant[philHealthId]" id="philHealthId" class="form-control">
+                        
+                        <label for="pagibigId" class="form-label mt-1">Pag-ibig ID: </label>
+                        <input type="text" name="applicant[pagibigId]" id="pagibigId" class="form-control">
+        
+                        <label for="tinId" class="form-label mt-1">TIN ID: </label>
+                        <input type="text" name="applicant[tinId]" id="tinId" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-50">
+            <div class="mx-2 border rounded-3 shadow-sm bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div class="mx-3">
+                    <h4 class="text-success my-2">Designation</h4>
+                </div>
+                <div class="w-80 m-3">
+                    <label for="office" class="form-label mt-2">Office: </label>
+                    <select name="applicant[office]" id="office" class="form-control">
+                        <option value="" selected>--Select Office--</option>
+                        <% for(let office of offices)  {%>
+                            <option value="<%=office.office  %>"><%=office.office  %></option>
+                            
+                            <% } %>
+                    </select>
+                    
+                    <label for="position" class="form-label mt-2">Position: </label>
+                    <select name="applicant[position]" id="position" class="form-control">
+                        <option value="">--Select Position--</option>
+                        <% for(let position of positions)  {%>
+                            <option value="<%= position %>"><%= position %></option>
+                            
+                            <% } %>
+                    </select>
+
+                    <label for="designation" class="form-label mt-2">Designation: </label>
+                    <select name="applicant[designation]" id="designation" class="form-control">
+                        <option value="" selected>--Select Designation--</option>
+                        <% for(let designation of designations)  {%>
+                            <option value="<%= designation  %>"><%= designation %></option>
+                            
+                            <% } %>
+                    </select>
+                    <br>
+
+                    <label for="dateStart" class="form-label align-middle me-2">Date Start:<span><em class="text-danger">*</em></span></label>
+                    <input type="date" name="applicant[dateStart]" id="dateStart" class="form-control w-50" required>
+                </div>
+            </div>
+            <div class="m-2 border rounded-3 shadow-sm bg-light" style="height:fit-content; font-size: 0.8em;">
+                <div class="mx-3">
+                    <h4 class="text-success my-2">Emergency Contact</h4>
+                </div>
+                <div class="w-80 m-3">
+                    <label for="emergContactPer" class="form-label mt-2">Contact Person:<span><em class="text-danger">*</em></span></label>
+                    <input type="text" name="applicant[emergContactPer]" id="emergContactPer" class="form-control" required>
+                    
+                    <label for="emerPhone" class="form-label mt-2">Contact Number:<span><em class="text-danger">*</em></span></label>
+                    <input type="number" name="applicant[emerPhone]" id="emerPhone" class="form-control" required>
+                    <label for="emerRelation" class="form-label mt-2">Relation:<span><em class="text-danger">*</em></span></label>
+                    <input type="text" name="applicant[emerRelation]" id="emerRelation" class="form-control w-50" required>
+                </div>
+            </div>
+            <div class="m-3 text-center">
+                <button class="btn btn-success mx-2">Submit</button>
+                <a href="/applications" class="btn btn-danger mx-2">Back</a>
+            </div>
+            
+        </div>
+    </div>
+    
+</form>

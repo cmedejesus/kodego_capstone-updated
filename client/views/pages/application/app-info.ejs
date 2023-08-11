@@ -1,0 +1,181 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="my-1">
+    <h3 class="page-header mt-4 ms-3">Applicant Information</h3>
+</div>
+<div class="d-flex justify-content-end top-0 end-0 pt-1 me-3">
+    <a href="/applications" class="btn backbtn mx-1 ps-3 pe-3"><i class="bi bi-arrow-90deg-left me-2"></i>Back</a>
+</div>
+
+<div class="m-3 card shadow">
+    <div class="d-flex">
+        <div class="d-flex align-items-center m-3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0aX49p2Q3ZJDmmhQl1aB1C3vJBfDhukMQPdaxiRAQyDwdauNY9dvV0CIqwYC1QsrAQj4&usqp=CAU" alt="bgfiller" 
+            class="img-fluid rounded-circle bg-light shadow position-relative"
+            style="height:100px;width:100px;">
+            <img src="" alt="" 
+            class="img-fluid rounded-circle bg-light shadow position-absolute"
+            style="height:100px;width:100px; object-fit: cover;"
+            onerror="this.style.display='none';">
+        </div>
+    <div class="d-flex align-items-center">
+        <div>
+            <div class="card-text my-2">
+                
+                <span class="ms-3 fs-5 text-success"><%= applicant.firstName %> <%= applicant.lastName %> </span>
+                <span> - <%= applicant.position %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3"><%= applicant.office %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3"><%= applicant.designation %></span>
+            </div>
+        </div>
+
+        <div class="position-absolute end-0 top-0 mt-2 me-3">
+
+            <div class="d-flex flex-row align-items-center">
+                <div>
+                    <a href="/applications/<%= applicant._id %>/edit"><button class="btn btn-sm ms-1" style="font-size:1.2em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+ </div>
+    <div class="border-top">
+        <div class="d-flex" style="font-size: 0.9em;">
+            <div class="card-body pt-1 ps-1  pe-0 col-3 me-0"> 
+              
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Street:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Barangay:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">City:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Province:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Zip / Postal Code:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Phone Number:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Phone Number 2:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Email Address:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Emergency Contact Person:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Contact Number:</span>
+                </div>
+            </div>
+            <div class="card-body pt-1 pe-1 ps-0 col-3 ms-0">
+                
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.street %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.barangay %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.city %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.province %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.postalCode %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.phoneNumber %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.phoneNumber2 %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.email %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.emergContactPer %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.emerPhone %></span>
+                </div>
+            </div>
+
+            <div class="card-body pt-1 ps-1 pe-0 col-3 me-0">
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Employee ID:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Department:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Role Title:</span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="text-success ms-3">Employment Start:</span>
+                </div>
+                <div class="border border-end-0 rounded-start me-0">
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">SSS ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">GSIS ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">PhilHealth ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">PagIbig ID:</span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3">TIN:</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-1 pe-1 ps-0 col-3 ms-0">
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.employeeId %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.office %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.designation %></span>
+                </div>
+                <div class="card-text my-2">
+                    <span class="ms-3"><%= applicant.dateStart %></span>
+                </div>
+                <div class="border border-start-0 rounded-end ms-0">
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= applicant.sssId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= applicant.gsisId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= applicant.philHealthId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= applicant.pagibigId %></span>
+                    </div>
+                    <div class="card-text my-2">
+                        <span class="text-success ms-3"><%= applicant.tinId %></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

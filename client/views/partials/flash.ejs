@@ -1,0 +1,14 @@
+
+<% if(success && success.length) { %>
+    <div class="alert success alert-dismissible fade show mt-2" role="alert">
+        <strong><%= success %> <i class="bi bi-shield-fill-check"></i></strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% } %>
+    
+<% if(error && error.length) { %>
+    <div class="alert error alert-dismissible fade show mt-2" role="alert">
+        <strong><%= error %> <i class="bi bi-shield-fill-exclamation"></i></strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>

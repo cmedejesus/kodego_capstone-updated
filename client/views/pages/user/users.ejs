@@ -1,0 +1,67 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="my-3">
+    <h3 class="page-header mt-4 ms-3">Users</h3>
+</div>
+
+<div class="d-flex col-10 justify-content-between mx-3">
+        <div class="">
+            <a href="/users/form"><button class="btn btn-success">Add User</button></a>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+            <form action="" class="d-flex me-2">
+                <input type="text" class="form-control me-2">
+                <button class="btn btn-success"><i class="bi bi-search text-light"></i></button>
+            </form>
+        </div>  
+</div>
+
+<section class="d-flex mx-3" style="max-height:80vh;">
+    <div class="col-10 overflow-auto">
+        <table class="table table-striped border rounded-3 ">
+            <thead>
+                <tr>
+                    <th class="text-success" style="width:15%;">Username</th>
+                    <th class="text-success" style="width:20%;">First Name</th>
+                    <th class="text-success" style="width:20%;">Last Name</th>
+                    <th class="text-success" style="width:10%;">Type</th>
+                    <th class="text-success" style="width:20%;">Status</th>
+                    <th class="text-success" style="width:15%;"></th>        
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let user of users) { %>
+                <tr>
+                    <td class="align-middle" style="font-size:0.9em;"><%=user.username  %></td>
+                    <td class="align-middle" style="font-size:0.9em;"><%=user.firstName  %></td>
+                    <td class="align-middle" style="font-size:0.9em;"><%=user.lastName  %></td>
+                    <td class="align-middle" style="font-size:0.9em;"><%=user.accountType %></td>
+                    <td class="align-middle" style="font-size:0.9em;"><%=user.status  %></td>
+                    <td class="">
+                        <div class="actions mx-0">
+                            <a href="/users/<%= user.id %>"><button class="btn btn-sm btn-light border border-success px-3 text-success" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-eye"></i></button></a>
+                            <a href="/users/<%= user.id %>/edit"><button class="btn btn-sm btn-success" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
+                            <a href="/users/update-users-form"><button class="btn btn-sm btn-danger ms-1" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Deactivate"><i class="bi bi-x-lg"></i></button></a>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+                <!-- <tr>
+                    <td class="align-middle" style="font-size:0.9em;">TestUser</td>
+                    <td class="align-middle" style="font-size:0.9em;">Test</td>
+                    <td class="align-middle" style="font-size:0.9em;">Test</td>
+                    <td class="align-middle" style="font-size:0.9em;">Staff</td>
+                    <td class="align-middle" style="font-size:0.9em;">Active</td>
+                    <td>
+                        <div class="actions mx-0">
+                            <a href="/employees/"><button class="btn btn-sm btn-light border border-success px-3" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-search"></i></button></a>
+                            <a href="/employees/update-employee-form"><button class="btn btn-sm btn-success" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
+                            <a href="/employees/update-employee-form"><button class="btn btn-sm btn-danger ms-1" style="font-size:0.9em;" data-toggle="tooltip" data-placement="top" title="Deactivate"><i class="bi bi-x-lg"></i></button></a>
+                        </div>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+    
+</section>

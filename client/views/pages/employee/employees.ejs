@@ -1,0 +1,92 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="my-3">
+    <h3 class="page-header mt-4 ms-3">Employees</h3>
+</div>
+<div class="ms-3 mb-3">
+    <a href="/employees/form"><button class="btn btn-success">Add Employee</button></a>
+</div>
+
+<div class="d-flex col-12 justify-content-between mx-3">
+        
+    <div class="d-flex justify-content-end mb-2">
+        <select name="" id="officeFilter" class="ps-1 rounded">
+            <option value="All">All Office</option>
+           <% for(let office of offices) { %>
+            <option value="<%= office.office %>"><%= office.office %></option>
+            <% } %>
+        </select>
+        <select name="" id="positionFilter" class="ps-1 ms-2 rounded">
+            <option value="">All Positions</option>
+            <% for(let position of positions) { %>
+                <option value="<%= position.slice(0,3).toUpperCase() %>"><%= position %></option>
+            <% } %>
+        </select>
+        <select name="" id="statusFilter" class="ps-1 ms-2 me-2 rounded">
+            <option value="">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+    </div>
+    <div class="d-flex justify-content-end mb-2">
+            <div id="printButton"><button class="btn btn-light me-2" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Print Table"><i class="bi bi-printer"></i></button></div>
+            <input type="text" class="form-control me-2 me-5" id="searchInput" placeholder="Search for a name">
+
+    </div>  
+   
+    
+</div>
+
+
+<section class="d-flex mx-3 mb-5" style="max-height:75vh;">
+    <div class="col-12 overflow-auto">
+        <table class="table table-striped border rounded-3" id="employeeTable">
+            <thead style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                <tr>
+                    <th class="text-success col text-center">Employee ID</th>
+                    <th class="text-success col text-center">First Name</th>
+                    <th class="text-success col text-center">Last Name</th>
+                    <th class="text-success col text-center">Role</th>
+                    <th class="text-success col text-center">Department</th>
+                    <th class="text-success col text-center">Status</th>        
+                    <th class="text-success no-print text-center"></th>        
+                </tr>
+            </thead>
+            <tbody id="">
+                <% for(let employee of employees) { %>
+                <tr class="employee-row">
+                    <td class="align-middle text-center employee-position" style="font-size:0.9em;"><%=employee.employeeId  %></td>
+                    <td class="align-middle text-center employee-firstName" style="font-size:0.9em;"><%=employee.firstName  %></td>
+                    <td class="align-middle text-center employee-lastName" style="font-size:0.9em;"><%=employee.lastName  %></td>
+                    <td class="align-middle text-center " style="font-size:0.9em;"><%=employee.designation %></td>
+                    <td class="align-middle text-center employee-office" style="font-size:0.9em;"><%=employee.office  %></td>
+                    <td class="align-middle text-center employee-status <%- employee.isActive === true ? 'text-success' : 'text-danger' %>" style="font-size:0.9em;"><%= employee.isActive === true ? 'Active' : 'Inactive' %></td>
+                    
+                    <td class="status no-print">
+                        <div class="actions col d-flex justify-content-center">
+                            <a href="/employees/<%=employee._id %>"><button class="btn btn-sm px-3 ms-1" style="font-size: 1.2em;" data-toggle="tooltip" data-placement="top" title="View"><i class="bi bi-eye"></i></button></a>
+                            
+                            <a href="/employees/<%= employee._id %>/update-employee-form"><button class="btn btn-sm ms-1" style="font-size:1em;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bi bi-pencil"></i></button></a>
+                            <% if(currentUser && currentUser.role === 'manager' || currentUser.role === 'admin') { %>
+                            <% if(employee.isActive === true) { %>
+                            <form action="/employees/<%= employee._id %>/deactivate?_method=PATCH" method="POST">
+                               <button class="btn btn-sm deactivate ms-1" style="font-size:1.2em;" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Deactivate"><i class="bi bi-toggle2-on"></i></button>
+                            </form>
+                            <% } %>
+                            <% if(employee.isActive === false) { %>
+                                <form action="/employees/<%= employee._id %>/activate?_method=PATCH" method="POST">
+                                    <button class="btn btn-sm activate ms-1" style="font-size:1.2em;" data-bs-toggle="tooltip" data-bs-html="true" data-placement="top" title="Activate"><i class="bi-toggle2-off"></i></button>
+                                </form>
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </td>
+
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+ 
+    </div>
+</section>
+

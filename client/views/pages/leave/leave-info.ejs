@@ -1,0 +1,44 @@
+<% layout('/layouts/boilerplate') %>
+<div class="my-3">
+    <h3 class="page-header mt-4 ms-3">Leave Information</h3>
+</div>
+<div class="m-3 card col-md-8 shadow">
+    <div class="d-flex align-items-center">
+        <div>
+            <a class="btn btn-light border border-success text-success ms-2" href="/leave-management/<%= leaver.id %>/update-leave-form">Edit</a>  
+            <form action="/leave-management/<%= leaver.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+          
+            <div class="card-text my-2">
+                <span class="ms-3">Employee Name:</span>
+                <span class="ps-1 text-success"><%= leaver.firstName %> <%= leaver.lastName %></span>
+                <span class="ms-3">Employee ID:</span>
+                <span class="ps-1 text-success"><%= leaver.employeeId %></span>
+                <span class="ms-3">Leave Type:</span>
+                <span class="ps-1 text-success"><%= leaver.leaveType %></span>
+            </div>
+           
+            <div class="card-text my-2">
+                <span class="ms-3">Leave Start Date:</span>
+                <span class="ps-1 text-success"><%= leaver.leaveStart %></span>
+                <span class="ms-3">Leave End Date:</span>
+                <span class="ps-1 text-success"><%= leaver.leaveEnd %></span>
+            </div>
+        
+            <div class="card-text my-2">
+                <span class="ms-3">Remarks:</span>
+                <span class="ps-1 text-success"><%= leaver.remarks %></span>
+            </div>
+            <div class="card-text my-2">
+                <span class="ms-3">Status:</span>
+                <span class="ps-1 text-success"><%= leaver.status%></span>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+<a href="/leave-management">
+    <button class="btn btn-light border border-success text-success ms-4">Back</button>
+</a>

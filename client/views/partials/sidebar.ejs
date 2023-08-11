@@ -1,0 +1,39 @@
+<aside class="d-flex flex-column flex-shrink-0 p-0 min-vh-100 start-0 top-0 mb-auto sidebar col-2" >
+    <div class=" mx-auto my-3 mb-4">
+        <img src="https://ayungon.gov.ph/static/media/ayungonLogo.fc0153c16641062c3ae1.png" alt="logo" style="width: 100px;">
+    </div>
+    
+      
+        <ul class="nav nav-pills flex-column ms-0">
+            <a href="/" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/dashboard' ? 'active' : '' %>"><i class="bi bi-laptop pe-2"></i>Dashboard</li></a>
+            <a href="/employees" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/employees' ? 'active' : '' %>"><i class="bi bi-people pe-2"></i>Employee Profiles</li></a>
+            <a href="/leave-management" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/leave-management' ? 'active' : '' %>"><i class="bi bi-calendar2-month pe-3"></i>Leave Management</li></a>
+            <a href="/applications" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/applications' ? 'active' : '' %>"><i class="bi bi-layout-text-window pe-2"></i> Applications</li></a>
+            <a href="/reports" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/reports' ? 'active' : '' %>"><i class="bi bi-person-vcard pe-3"></i>User Logs</li></a>
+            <% if(currentUser && currentUser.role === 'admin') { %>
+                <a href="/users" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/users' ? 'active' : '' %>">Users</li></a>
+                <a href="/register" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center<%- activePage === '' ? 'active' : '' %>">Register</li></a>
+            <% } %>
+        </ul>
+    
+       
+        <div class="d-flex fixed-bottom m-4" style="width:fit-content;">
+            <div class="d-flex align-items-center" >
+                <img src="/images/blankpic.jpg" alt="bgfiller" 
+                class="img-fluid rounded-circle bg-light shadow position-relative" style="height:50px;width:50px;">
+                <img src="/images/pic.jpg" alt="" 
+                        class="img-fluid rounded-circle bg-light shadow position-absolute"
+                        style="height:50px;width:50px;"
+                        onerror="this.style.display='none';">
+            </div>
+            <div class="align-items-center mx-3" style="width:fit-content;">
+                <div class="align-items-center mx-3">
+                    <p class="mb-1"><%= currentUser.firstName.charAt(0).toUpperCase() + currentUser.firstName.slice(1).toLowerCase() %> <%= currentUser.lastName.charAt(0).toUpperCase() + currentUser.lastName.slice(1).toLowerCase()%></p>
+                    <p class="mb-1" style="font-size:0.9em;"><%= currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1).toLowerCase() %></p> 
+                    <form class="" action="/logout" method="POST">
+                        <button class="btn btn-sm btn-secondary"><i class="bi bi-box-arrow-left pe-2"></i>Logout</button>
+                     </form>
+                </div>
+            </div>
+        </div>
+</aside>

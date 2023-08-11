@@ -1,0 +1,55 @@
+<% layout('/layouts/boilerplate') %>
+
+<div>
+    <h3 class="my-3 page-header mt-1 ms-3">Edit User Information</h3>
+</div>
+
+<form action="/users/<%= user._id %>?_method=PATCH" method="POST" class="validated-form" novalidate>
+    <div class="bg-light col-sm-10 col-md-6 mx-3 p-3 shadow-sm rounded-3">
+        <div>
+            <h4 class="mt-1 page-header mt-1">User Information</h4>
+            <span class="mt-0" style="font-size: 0.8em;"><em class="text-danger align-bottom">*required</em></span>
+        </div>
+        <div class="mt-2">
+            <label for="Account Type" class="form-label">Account Type:<span><em class="text-danger">*</em></span></label>
+            <select name="user[accountType]" id="accountType" class="form-control w-25" required>
+                <option value="" disabled>Please Select</option>
+                <% for (let type of accountType) { %>
+                    <option value="<%= type %>" <%= user.accountType === type ? 'selected' : '' %>><%= type %></option>
+                <% } %>
+            </select>
+        </div>
+        <div class="mt-2">
+            <label for="username" class="form-label">Username:<span><em class="text-danger">*</em></span></label>
+            <input type="text" name="user[username]" id="userName" class="form-control" value="<%= user.username %>" required>
+        </div>
+        <div class="mt-2 d-none">
+            <label for="password" class="form-label">Password:<span><em class="text-danger">*</em></span></label>
+            <input type="password" name="user[password]" id="password" class="form-control" value="<%= user.password %>"  required>
+        </div>
+        <div class="mt-2 d-none">
+            <label for="passwordConfirm" class="form-label">Confirm Password:<span><em class="text-danger">*</em></span></label>
+            <input type="password" name="" id="passwordConfirm" class="form-control" value="<%= user.password %>"  required>
+                <em class="text-danger" id="confirmMsg" style="font-size: 0.8em;"></em>
+        </div>
+        <div class="mt-2">
+            <label for="name" class="form-label">First Name:<span><em class="text-danger">*</em></span></label>
+            <input type="text" name="user[firstName]" id="firstName" class="form-control" value="<%= user.firstName %>"  required>
+        </div>
+        <div class="mt-2">
+            <label for="name" class="form-label">Last Name:<span><em class="text-danger">*</em></span></label>
+            <input type="text" name="user[lastName]" id="lastName" class="form-control" value="<%= user.lastName %>"  required>
+        </div>
+        <div class="mt-2">
+            <label for="email" class="form-label">Email:<span><em class="text-danger">*</em></span></label>
+            <input type="email" name="user[email]" id="email" class="form-control" value="<%= user.email %>"  required>
+        </div>
+        <div>
+            <input type="text" value="active" name="user[status]" class="d-none">
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <button id="submit" class="btn btn-success mx-1" disabled>Submit</button>
+            <a href="/users/<%= user.id %>" class="btn btn-danger">Cancel</a>
+        </div>
+    </div>
+</form>
