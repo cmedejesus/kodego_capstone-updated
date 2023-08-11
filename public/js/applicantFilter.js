@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const applicantRows = document.querySelectorAll('.applicant-row');
+    const applicantRows = document.querySelectorAll('.leave-row');
     const searchInput = document.getElementById('searchInput');
     const officeFilter = document.getElementById('officeFilter');
     const statusFilter = document.getElementById('statusFilter');

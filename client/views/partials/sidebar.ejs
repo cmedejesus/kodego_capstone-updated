@@ -37,7 +37,7 @@
             
             <div class="align-items-center mx-3">
                 <div class="align-items-center mx-3">
-                    <p class="mb-1 text-wrap" style="font-size:0.8em;"><%= textFormat(currentUser.firstName)%> <%= textFormat(currentUser.lastName)%></p>
+                    <p class="mb-1 text-wrap" style="font-size:0.8em; width:150px;"><%= textFormat(currentUser.firstName)%> <%= textFormat(currentUser.lastName)%></p>
                     <p class="mb-1" style="font-size:0.9em;"><%= textFormat(currentUser.role) %></p> 
                     <form class="d-flex align-items-center" action="/logout" method="POST">
                         <button class="btn btn-sm btn-secondary border-0" type="submit">

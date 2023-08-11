@@ -6,8 +6,8 @@
     
 <div class="d-flex col-12 justify-content-between mx-3 my-2">
     <div class="d-flex">
-        <select name="role" id="roleFilter" class="rounded px-2" required>
-            <option value="" selected>All</option>
+        <select name="role" id="leaveFilter" class="rounded px-2" required>
+            <option value="all" selected>All</option>
             <% for (let type of leaveTypes) { %>
                 <option value="<%= type %>"><%= type %></option>
             <% } %>
@@ -44,10 +44,10 @@
                 <%  for(let leave of leaves) { %>
                 <tr class="align-middle employee-row" style="font-size: 0.9em;">
                     <td class="align-middle text-center"><%= leave.employeeId %></td>
-                    <td class="align-middle text-center"><%= leave.firstName %> <%= leave.lastName %></td>
+                    <td class="align-middle text-center leave-name"><%= leave.firstName %> <%= leave.lastName %></td>
                     <td class="align-middle text-center"><%= leave.leaveStart %></td>
                     <td class="align-middle text-center"><%= leave.leaveEnd %></td>
-                    <td class="align-middle text-center"><%= leave.leaveType %></td>
+                    <td class="align-middle text-center leave-type"><%= leave.leaveType %></td>
                     <td class="align-middle text-center"><%= leave.remarks %></td>
                     <td class="no-print">
                         <div class="actions mx-0 d-flex align-middle">
