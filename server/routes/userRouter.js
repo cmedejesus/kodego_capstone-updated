@@ -20,13 +20,13 @@ const userValidate = (req, res, next) => {
 
 router.get('/login', viewLogin)
 router.post('/login', storeReturnTo, passport.authenticate('local', {failureFlash: true, failureRedirect: '/login'}), userLogin);
-router.post('/logout',logout);
-router.get('/users', viewAllUsers)
-router.get('/users/form', userForm)
-router.post('/users', userValidate, addUser)   
-router.get('/users/:id', viewUser)   
-router.get('/users/:id/edit', editUserForm)
-router.patch('/users/:id', userValidate, editUser)
-router.delete('/users/:id', deleteUser)   
+router.post('/logout', logout);
+router.get('/users', isLoggedIn, isAccessibleByAdminOnly, viewAllUsers)
+router.get('/users/form', isLoggedIn, isAccessibleByAdminOnly, userForm)
+router.post('/users', isLoggedIn, isAccessibleByAdminOnly, userValidate, addUser)   
+router.get('/users/:id', isLoggedIn, isAccessibleByAdminOnly, viewUser)   
+router.get('/users/:id/edit', isLoggedIn, isAccessibleByAdminOnly, editUserForm)
+router.patch('/users/:id', isLoggedIn, isAccessibleByAdminOnly, userValidate, editUser)
+router.delete('/users/:id', isLoggedIn, isAccessibleByAdminOnly, deleteUser)   
  
 module.exports = router

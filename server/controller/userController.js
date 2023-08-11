@@ -15,29 +15,43 @@ const roles =  ['admin', 'manager', 'staff'];
 
 exports.viewAllUsers = catchAsync(async (req,res)=>{
   const users = await User.find({})
-  res.render('pages/user/users',{users, activePage});
+  res.render('pages/user/users',{users, roles, activePage});
 })
 
 exports.userForm = async (req,res)=>{
-    res.render('user/addUserForm', {activePage, accountType});
+    res.render('pages/user/addUserForm', {activePage, roles});
 }
 
 exports.addUser = catchAsync(async (req,res)=>{
-    const newUser = new User(req.body.user)
-    await newUser.save()
-    res.redirect('/users');
+  try {
+    const {email, firstName, lastName, username, password, role} = req.body;
+
+    const user = new User({email, username, firstName, lastName, role});
+    const registeredUser = await User.register(user, password);
+
+    req.login(registeredUser, function(err) {
+      if(err) {
+        return next(err);
+      }
+        req.flash('success', 'Welcome to HRMS!');
+        res.redirect('/');
+    })
+  } catch(e) {
+    req.flash('error', e.message);
+    res.redirect('/');
+  }
 })
 
 exports.viewUser = async(req,res)=>{
     const id = req.params.id;
     const user = await User.findById(id);
-    res.status(200).render('user/user-info',{user, activePage});
+    res.status(200).render('pages/user/user-info',{user, activePage});
 }
 
 exports.editUserForm = async (req,res)=>{
     const userId = req.params.id;
     const user = await User.findById(userId);
-    res.status(200).render('user/edit',{user, accountType, activePage});
+    res.status(200).render('pages/user/edit',{user, roles, activePage});
 }
 
 exports.editUser = async (req,res)=>{

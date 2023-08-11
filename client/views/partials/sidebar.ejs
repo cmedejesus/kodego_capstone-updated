@@ -11,8 +11,7 @@
             <a href="/applications" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/applications' ? 'active' : '' %>"><i class="bi bi-layout-text-window pe-2"></i> Applications</li></a>
             <a href="/reports" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/reports' ? 'active' : '' %>"><i class="bi bi-person-vcard pe-3"></i>User Logs</li></a>
             <% if(currentUser && currentUser.role === 'admin') { %>
-                <a href="/users" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/users' ? 'active' : '' %>">Users</li></a>
-                <a href="/register" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center<%- activePage === '' ? 'active' : '' %>">Register</li></a>
+                <a href="/users" class="text-decoration-none"><li class="nav-item border-4 border-start border-light py-3 text-center <%- activePage === '/users' ? 'active' : '' %>"><i class="bi bi-person-check pe-3"></i>Users</li></a>
             <% } %>
         </ul>
     

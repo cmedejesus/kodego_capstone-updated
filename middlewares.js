@@ -33,8 +33,8 @@ module.exports.leaveValidate = (req, res, next) => {
 module.exports.isAccessible = async (req, res, next) => {
     const {id} = req.params;
     const currentUserAccess = req.user;
-    const accessibleBy = currentUserAccess.role === 'admin' || 'manager';
-    if(currentUserAccess.role != accessibleBy) {
+    const accessibleBy = currentUserAccess.role == 'admin' || currentUserAccess.role == 'manager';
+    if(!accessibleBy) {
       req.flash('error', 'You do not have permission to perform this action!');
       res.redirect(`/employees/${id}`)
     } else {
@@ -45,10 +45,10 @@ module.exports.isAccessible = async (req, res, next) => {
   module.exports.isAccessibleByAdminOnly = async (req, res, next) => {
    
     const currentUserAccess = req.user;
-    const accessibleBy = currentUserAccess.role === 'admin';
-    if(currentUserAccess.role != accessibleBy) {
+    const accessibleBy = currentUserAccess.role == 'admin';
+    if(!accessibleBy) {
       req.flash('error', 'Admin actions only!');
-      res.redirect(`/register`)
+      res.redirect(`/`)
     } else {
       next();
     }

@@ -1,12 +1,13 @@
 const Joi = require('joi');
 
 module.exports.userSchemaValidation = Joi.object({
-    user: Joi.object({
-        name: Joi.string().required(),
-        password: Joi.string().required(),
-        email: Joi.string().required()
-    }).required()
-
+    username: Joi.string().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    password: Joi.string().required(),
+    email: Joi.string().required(),
+    role: Joi.string().required(),
+    status: Joi.string().required()
 })
 
 module.exports.employeeSchemaValidation = Joi.object({

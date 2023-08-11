@@ -12,7 +12,9 @@
     <body class="d-flex flex-column min-vh-100 overflow-hidden">
 
         <div class="d-flex vh-100">
+            <% if(currentUser) { %>
             <%- include('../partials/sidebar') %>
+            <% } %>
             
             <main class="container">
                 <%- include('../partials/flash') %>
@@ -29,6 +31,7 @@
         <script src="/js/script.js"></script>
         <script src="/js/sorting.js"></script> 
         <script src="/js/applicantFilter.js"></script> 
+        <script src="/js/userFilter.js"></script> 
         <script src="/js/printJs.js"></script>
         <script src="/js/userConfirmPw.js"></script>
     </body>
